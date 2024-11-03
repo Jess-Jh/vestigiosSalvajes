@@ -1,4 +1,5 @@
 // lib/main.dart
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:vestigios_salvajes/models/question.dart';
 import 'package:vestigios_salvajes/src/pages/trivia_screen.dart';
@@ -36,10 +37,18 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
+  late AudioPlayer _audioPlayer;
 
   @override
   void initState() {
     super.initState();
+    // Inicializar el AudioPlayer y reproducir el sonido de jungla
+    _audioPlayer = AudioPlayer();
+    _audioPlayer.play(
+      AssetSource('/sounds/jungle_sound.mp3'),
+      volume: 1,
+    );
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 5),
@@ -53,6 +62,8 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
   @override
   void dispose() {
     _controller.dispose();
+    _audioPlayer.dispose(); // Detener y liberar el reproductor de audio
+
     super.dispose();
   }
 
