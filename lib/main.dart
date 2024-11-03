@@ -3,7 +3,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:vestigios_salvajes/models/question.dart';
 import 'package:vestigios_salvajes/src/pages/trivia_screen.dart';
-import 'package:vestigios_salvajes/src/widgets/jungle_clipper.dart';
+import 'package:vestigios_salvajes/src/widgets/moving_curve_image.dart';
 
 void main() {
   runApp(const TriviaApp());
@@ -62,6 +62,8 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
   @override
   void dispose() {
     _controller.dispose();
+    _audioPlayer.stop();
+
     _audioPlayer.dispose(); // Detener y liberar el reproductor de audio
 
     super.dispose();
@@ -100,14 +102,9 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                     ),
                   ),
                   const SizedBox(height: 20),
-                  ClipPath(
-                    clipper: JungleClipper(),
-                    child: Image.asset(
-                      'assets/images/intro_image.webp', // Asegúrate de tener esta imagen en tu proyecto
-                      height: 350,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+                  // Imagen con bordes animados
+                  const MovingCurvedImage(),
+
                   const SizedBox(height: 30),
                   const Text(
                     'Selecciona el nivel de dificultad',
@@ -132,6 +129,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                               const TriviaScreen(difficulty: Difficulty.easy),
                         ),
                       );
+                      _audioPlayer.stop();
                     },
                     child: const Text('Fácil'),
                   ),
@@ -154,6 +152,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                               const TriviaScreen(difficulty: Difficulty.medium),
                         ),
                       );
+                      _audioPlayer.stop();
                     },
                     child: const Text('Intermedio'),
                   ),
@@ -176,6 +175,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                               const TriviaScreen(difficulty: Difficulty.hard),
                         ),
                       );
+                      _audioPlayer.stop();
                     },
                     child: const Text('Difícil'),
                   ),
