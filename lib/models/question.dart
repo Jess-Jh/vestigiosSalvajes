@@ -6,6 +6,7 @@ class Question {
   int correctAnswerIndex;
   String info;
   Difficulty difficulty;
+  String imagePath;
 
   Question({
     required this.question,
@@ -13,5 +14,6 @@ class Question {
     required this.correctAnswerIndex,
     required this.info,
     required this.difficulty,
+    required this.imagePath,
   });
 }
