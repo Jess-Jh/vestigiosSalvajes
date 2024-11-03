@@ -24,6 +24,14 @@ List<Question> getQuestions() {
           "La deforestación fue la principal causa de la extinción del Pájaro Carpintero Real.",
       difficulty: Difficulty.medium,
     ),
+    Question(
+      question:
+          "¿Qué especie extinta de Colombia era conocida por su gran tamaño?",
+      options: ["Megatherium", "Dodo", "Moa", "Tigre de Tasmania"],
+      correctAnswerIndex: 0,
+      info: "El Megatherium fue un perezoso gigante que vivió en Sudamérica.",
+      difficulty: Difficulty.hard,
+    ),
     // Añade más preguntas con diferentes dificultades...
   ];
 }
