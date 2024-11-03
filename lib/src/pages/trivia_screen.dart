@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart'; // Importa el paquete de audio
 import 'package:vestigios_salvajes/models/question.dart';
@@ -68,7 +69,10 @@ class _TriviaScreenState extends State<TriviaScreen>
       case Difficulty.easy:
         boxDecoration = BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.green[300]!, Colors.teal[900]!],
+            colors: [
+              Colors.green[300]!.withOpacity(0.7),
+              Colors.teal[900]!.withOpacity(0.7),
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -82,16 +86,20 @@ class _TriviaScreenState extends State<TriviaScreen>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(16),
+            bottomRight: Radius.circular(16),
+          ),
         );
         audioPlayer.setSource(AssetSource(
             'sounds/easy.wav')); // Asegúrate de tener el archivo en assets
         break;
       case Difficulty.medium:
-        boxDecoration = const BoxDecoration(
+        boxDecoration = BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 234, 170, 102),
-              Color.fromARGB(255, 255, 140, 0)
+              const Color.fromARGB(255, 234, 170, 102).withOpacity(0.7),
+              const Color.fromARGB(255, 255, 140, 0).withOpacity(0.7),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -106,15 +114,19 @@ class _TriviaScreenState extends State<TriviaScreen>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(16),
+            bottomRight: Radius.circular(16),
+          ),
         );
         audioPlayer.setSource(AssetSource('sounds/medium.wav'));
         break;
       case Difficulty.hard:
-        boxDecoration = const BoxDecoration(
+        boxDecoration = BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 241, 111, 111),
-              Color.fromARGB(255, 177, 14, 14)
+              const Color.fromARGB(255, 241, 111, 111).withOpacity(0.7),
+              const Color.fromARGB(255, 177, 14, 14).withOpacity(0.7)
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -128,6 +140,10 @@ class _TriviaScreenState extends State<TriviaScreen>
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
+          ),
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(16),
+            bottomRight: Radius.circular(16),
           ),
         );
         audioPlayer.setSource(AssetSource('sounds/hard.mp3'));
@@ -163,15 +179,35 @@ class _TriviaScreenState extends State<TriviaScreen>
 
   void checkAnswer(int selectedIndex) {
     if (isAnswered) return;
-    timer?.cancel();
+    String feedbackMessage;
+    String imagePath;
+    bool isCorrect = false;
+
     setState(() {
+      timer?.cancel();
       isAnswered = true;
       if (selectedIndex == questions[currentQuestionIndex].correctAnswerIndex) {
         score++;
-        feedbackMessage = "¡Correcto! ${questions[currentQuestionIndex].info}";
+        isCorrect = true;
       } else {
-        feedbackMessage = "Incorrecto. ${questions[currentQuestionIndex].info}";
+        isCorrect = false;
       }
+
+      if (isCorrect) {
+        feedbackMessage =
+            '¡Correcto! Este animal es el dodo, extinto hace siglos.';
+        imagePath = 'assets/images/animals/megatherium.jpg';
+      } else {
+        feedbackMessage = 'Incorrecto. Intenta nuevamente.';
+        imagePath = 'assets/images/wrong_answer.jpeg';
+      }
+
+      showFeedbackDialog(
+        feedbackMessage,
+        imagePath,
+        isCorrect ? 'Correcto' : 'Incorrecto',
+      );
+
       // audioPlayer
       //     .setSource(AssetSource('sounds/answer.mp3')); // Sonido al responder
       audioPlayer.resume(); // Reproducir el sonido
@@ -259,7 +295,7 @@ class _TriviaScreenState extends State<TriviaScreen>
             );
           },
         ),
-        backgroundColor: Colors.green[700], // Color de fondo del AppBar
+        // backgroundColor: Colors.green[700], // Color de fondo del AppBar
         actions: [
           IconButton(
             icon: const Icon(Icons.info),
@@ -276,27 +312,46 @@ class _TriviaScreenState extends State<TriviaScreen>
       ),
       body: Container(
         decoration: boxDecoration, // Cambiar el color de fondo
-        padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 50.0),
+        padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 30.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Text(
+              'Pregunta ${currentQuestionIndex + 1}/${questions.length}',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.end,
+            ),
+            const SizedBox(height: 20),
             LinearProgressIndicator(
               value: _progressAnimation.value,
+              borderRadius: BorderRadius.circular(8.0),
               color:
                   Colors.redAccent, // Cambia el color de la barra si lo deseas
               backgroundColor: Colors.grey[300],
               minHeight: 8.0,
             ),
             const SizedBox(height: 20),
-            Text(
-              'Pregunta ${currentQuestionIndex + 1}/${questions.length}',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.end,
-            ),
-            const SizedBox(height: 20),
-            Text(
-              currentQuestion.question,
-              style: const TextStyle(fontSize: 20),
+            DottedBorder(
+              // color: Colors.black,
+              strokeWidth: 1.5,
+              dashPattern: const [6, 3],
+              borderType: BorderType.RRect,
+              radius: const Radius.circular(12),
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Text(
+                  currentQuestion.question,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             ...currentQuestion.options.asMap().entries.map((entry) {
@@ -327,6 +382,66 @@ class _TriviaScreenState extends State<TriviaScreen>
           ],
         ),
       ),
+    );
+  }
+
+  // Muestra el diálogo de feedback con mensaje e imagen
+  void showFeedbackDialog(
+    String feedbackMessage,
+    String imagePath,
+    String title,
+  ) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(16),
+          title: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  imagePath,
+                  height: 200,
+                  // width: 150,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                feedbackMessage,
+                style: const TextStyle(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'Cerrar',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
