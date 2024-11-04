@@ -16,7 +16,7 @@ List<Question> getQuestions() {
       info:
           "El Megatherium, o perezoso gigante, habitó en la región norte de Colombia y llegó a medir hasta 6 metros.",
       difficulty: Difficulty.easy,
-      imagePath: "assets/images/megatherium.png",
+      imagePath: "assets/images/animals/megatherium.png",
     ),
     Question(
       question:
@@ -31,7 +31,7 @@ List<Question> getQuestions() {
       info:
           "El Cóndor de los Andes es símbolo de libertad y fortaleza, y vive en las altas montañas andinas.",
       difficulty: Difficulty.easy,
-      imagePath: "assets/images/condor_andes.png",
+      imagePath: "assets/images/animals/condor_andes.png",
     ),
     Question(
       question:
@@ -46,7 +46,7 @@ List<Question> getQuestions() {
       info:
           "La Tortuga Carey habita en el Caribe colombiano y está en peligro crítico por la caza furtiva.",
       difficulty: Difficulty.easy,
-      imagePath: "assets/images/tortuga_carey.png",
+      imagePath: "assets/images/animals/tortuga_carey.png",
     ),
     Question(
       question:
@@ -56,7 +56,7 @@ List<Question> getQuestions() {
       info:
           "El Oso de anteojos vive en los Andes colombianos y está en peligro por la caza y la deforestación.",
       difficulty: Difficulty.easy,
-      imagePath: "assets/images/oso_anteojos.png",
+      imagePath: "assets/images/animals/oso_anteojos.png",
     ),
     Question(
       question:
@@ -66,7 +66,7 @@ List<Question> getQuestions() {
       info:
           "El delfín rosado del Amazonas habita en los ríos colombianos y está amenazado por la contaminación.",
       difficulty: Difficulty.easy,
-      imagePath: "assets/images/delfin_rosado.png",
+      imagePath: "assets/images/animals/delfin_rosado.png",
     ),
     Question(
       question:
@@ -76,7 +76,7 @@ List<Question> getQuestions() {
       info:
           "El piracucú, uno de los peces de agua dulce más grandes del mundo, está amenazado por la sobrepesca.",
       difficulty: Difficulty.easy,
-      imagePath: "assets/images/piracucu.png",
+      imagePath: "assets/images/animals/piracucu.png",
     ),
     Question(
       question:
@@ -91,7 +91,7 @@ List<Question> getQuestions() {
       info:
           "La rana arlequín, que vive en zonas húmedas, ha sido muy afectada por la deforestación.",
       difficulty: Difficulty.easy,
-      imagePath: "assets/images/rana_arlequin.png",
+      imagePath: "assets/images/animals/rana_arlequin.png",
     ),
     Question(
       question:
@@ -101,7 +101,7 @@ List<Question> getQuestions() {
       info:
           "El Pájaro Carpintero Real se extinguió debido a la deforestación masiva en su hábitat.",
       difficulty: Difficulty.easy,
-      imagePath: "assets/images/pajaro_carpintero.png",
+      imagePath: "assets/images/animals/pajaro_carpintero.png",
     ),
     Question(
       question:
@@ -116,7 +116,7 @@ List<Question> getQuestions() {
       info:
           "La tortuga Carey está en peligro crítico debido a la caza ilegal en el Caribe.",
       difficulty: Difficulty.easy,
-      imagePath: "assets/images/tortuga_carey.png",
+      imagePath: "assets/images/animals/tortuga_carey.png",
     ),
     Question(
       question:
@@ -126,7 +126,7 @@ List<Question> getQuestions() {
       info:
           "El Jaguar es el felino más grande de América y está en peligro debido a la pérdida de su hábitat.",
       difficulty: Difficulty.easy,
-      imagePath: "assets/images/jaguar.png",
+      imagePath: "assets/images/animals/jaguar.png",
     ),
     // Continúa con 10 preguntas fáciles adicionales para este nivel
     // ...
@@ -145,7 +145,7 @@ List<Question> getQuestions() {
       info:
           "El manatí amazónico está amenazado por la contaminación de su hábitat en la Amazonía.",
       difficulty: Difficulty.medium,
-      imagePath: "assets/images/manati_amazonas.png",
+      imagePath: "assets/images/animals/manati_amazonas.png",
     ),
     Question(
       question:
@@ -155,7 +155,7 @@ List<Question> getQuestions() {
       info:
           "En la selva tropical, las aves son los principales depredadores de la rana venenosa dorada.",
       difficulty: Difficulty.medium,
-      imagePath: "assets/images/rana_venenosa_dorada.png",
+      imagePath: "assets/images/animals/rana_venenosa_dorada.png",
     ),
     Question(
       question:
@@ -165,7 +165,7 @@ List<Question> getQuestions() {
       info:
           "El mono araña, amenazado por la pérdida de hábitat, habita en la Sierra Nevada de Santa Marta.",
       difficulty: Difficulty.medium,
-      imagePath: "assets/images/mono_arana.png",
+      imagePath: "assets/images/animals/mono_arana.png",
     ),
     Question(
       question:
@@ -180,7 +180,7 @@ List<Question> getQuestions() {
       info:
           "La Titanoboa, la serpiente más grande conocida, habitó en lo que hoy es La Guajira.",
       difficulty: Difficulty.medium,
-      imagePath: "assets/images/titanoboa.png",
+      imagePath: "assets/images/animals/titanoboa.png",
     ),
     Question(
       question:
@@ -195,7 +195,7 @@ List<Question> getQuestions() {
       info:
           "La caza furtiva ha sido una de las principales causas de la disminución de cóndores.",
       difficulty: Difficulty.medium,
-      imagePath: "assets/images/condor_andes.png",
+      imagePath: "assets/images/animals/condor_andes.png",
     ),
     // Continua con más preguntas de dificultad media (20 en total)
 
@@ -213,7 +213,7 @@ List<Question> getQuestions() {
       info:
           "El cambio climático y la caza contribuyeron a la extinción de este perezoso gigante.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/megatherium_extinto.png",
+      imagePath: "assets/images/animals/megatherium_extinto.png",
     ),
     Question(
       question:
@@ -228,7 +228,7 @@ List<Question> getQuestions() {
       info:
           "La rana dorada venenosa solo se encuentra en Colombia y Ecuador, y su veneno es uno de los más potentes.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/rana_dorada.png",
+      imagePath: "assets/images/animals/rana_dorada.png",
     ),
     Question(
       question:
@@ -238,7 +238,7 @@ List<Question> getQuestions() {
       info:
           "El pirarucú, uno de los peces de agua dulce más grandes, está extinto localmente en algunos ríos.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/pirarucu_extinto.png",
+      imagePath: "assets/images/animals/pirarucu_extinto.png",
     ),
     Question(
       question:
@@ -253,7 +253,7 @@ List<Question> getQuestions() {
       info:
           "El oso de anteojos se encuentra principalmente en los Andes colombianos.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/oso_anteojos.png",
+      imagePath: "assets/images/animals/oso_anteojos.png",
     ),
     Question(
       question:
@@ -268,7 +268,7 @@ List<Question> getQuestions() {
       info:
           "Los pueblos indígenas usaban el veneno de la rana dorada para envenenar sus dardos.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/rana_dorada.png",
+      imagePath: "assets/images/animals/rana_dorada.png",
     ),
     Question(
       question:
@@ -283,7 +283,7 @@ List<Question> getQuestions() {
       info:
           "La caza por parte de los humanos y los cambios climáticos contribuyeron a la extinción del Tigre Dientes de Sable.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/tigre_dientes_de_sable.png",
+      imagePath: "assets/images/animals/tigre_dientes_de_sable.png",
     ),
     Question(
       question:
@@ -298,7 +298,7 @@ List<Question> getQuestions() {
       info:
           "El Pájaro Carpintero Real, conocido por sus plumas amarillas y negras, se extinguió debido a la pérdida de hábitat.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/pajaro_carpintero_real.png",
+      imagePath: "assets/images/animals/pajaro_carpintero_real.png",
     ),
     Question(
       question:
@@ -313,7 +313,7 @@ List<Question> getQuestions() {
       info:
           "La caza furtiva ha reducido drásticamente la población del Caimán del Orinoco en los ríos colombianos.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/caiman_orinoco.png",
+      imagePath: "assets/images/animals/caiman_orinoco.png",
     ),
     Question(
       question:
@@ -328,7 +328,7 @@ List<Question> getQuestions() {
       info:
           "El murciélago frugívoro es una especie en peligro de extinción debido a la deforestación.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/murcielago_frugivoro.png",
+      imagePath: "assets/images/animals/murcielago_frugivoro.png",
     ),
     Question(
       question:
@@ -343,7 +343,7 @@ List<Question> getQuestions() {
       info:
           "El Megatherium desapareció principalmente debido a la caza y los cambios en su entorno.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/megatherium_extinto.png",
+      imagePath: "assets/images/animals/megatherium_extinto.png",
     ),
     Question(
       question:
@@ -358,7 +358,7 @@ List<Question> getQuestions() {
       info:
           "La caza furtiva ha sido una de las principales amenazas para las tortugas en el Caribe.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/tortuga_extinta_caribe.png",
+      imagePath: "assets/images/animals/tortuga_extinta_caribe.png",
     ),
     Question(
       question:
@@ -373,7 +373,7 @@ List<Question> getQuestions() {
       info:
           "El oso de anteojos, o Tremarctos ornatus, habita en la región andina de Colombia.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/oso_anteojos.png",
+      imagePath: "assets/images/animals/oso_anteojos.png",
     ),
     Question(
       question:
@@ -383,7 +383,7 @@ List<Question> getQuestions() {
       info:
           "El piracucú, uno de los peces de agua dulce más grandes, está en peligro debido a la sobrepesca.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/piracucu.png",
+      imagePath: "assets/images/animals/piracucu.png",
     ),
     Question(
       question:
@@ -398,7 +398,7 @@ List<Question> getQuestions() {
       info:
           "La rana dorada de Colombia es de interés médico debido a su potente veneno.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/rana_dorada.png",
+      imagePath: "assets/images/animals/rana_dorada.png",
     ),
     Question(
       question:
@@ -408,7 +408,7 @@ List<Question> getQuestions() {
       info:
           "El Mono Aullador Rojo vive principalmente en la selva amazónica y está en peligro por la deforestación.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/mono_aullador.png",
+      imagePath: "assets/images/animals/mono_aullador.png",
     ),
     Question(
       question:
@@ -423,7 +423,7 @@ List<Question> getQuestions() {
       info:
           "La deforestación en los bosques tropicales está disminuyendo el hábitat del Águila Harpía.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/aguila_harpia.png",
+      imagePath: "assets/images/animals/aguila_harpia.png",
     ),
     Question(
       question: "¿Cuál es el hábitat principal del delfín rosado del Amazonas?",
@@ -437,7 +437,7 @@ List<Question> getQuestions() {
       info:
           "El delfín rosado habita en ríos y lagunas del Amazonas y Orinoquía.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/delfin_rosado.png",
+      imagePath: "assets/images/animals/delfin_rosado.png",
     ),
     Question(
       question:
@@ -452,7 +452,7 @@ List<Question> getQuestions() {
       info:
           "La Titanoboa fue una serpiente gigante que habitó en la región de La Guajira hace millones de años.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/titanoboa.png",
+      imagePath: "assets/images/animals/titanoboa.png",
     ),
     Question(
       question:
@@ -467,7 +467,7 @@ List<Question> getQuestions() {
       info:
           "El Águila harpía está en grave peligro debido a la deforestación en la Amazonía.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/aguila_harpia.png",
+      imagePath: "assets/images/animals/aguila_harpia.png",
     ),
     Question(
       question:
@@ -482,7 +482,7 @@ List<Question> getQuestions() {
       info:
           "La Tortuga Carey está críticamente amenazada debido a la caza y pérdida de hábitat.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/tortuga_carey.png",
+      imagePath: "assets/images/animals/tortuga_carey.png",
     ),
     Question(
       question:
@@ -497,7 +497,7 @@ List<Question> getQuestions() {
       info:
           "El Mono araña de cabeza negra es una especie en peligro crítico por la deforestación y caza.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/mono_arana_negra.png",
+      imagePath: "assets/images/animals/mono_arana_negra.png",
     ),
     Question(
       question:
@@ -526,7 +526,7 @@ List<Question> getQuestions() {
       info:
           "La rana dorada venenosa es extremadamente tóxica y vive en bosques tropicales de Colombia.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/rana_dorada.png",
+      imagePath: "assets/images/animals/rana_dorada.png",
     ),
     Question(
       question:
@@ -541,7 +541,7 @@ List<Question> getQuestions() {
       info:
           "El loro orejiamarillo es una especie en peligro crítico que habita en los Andes colombianos.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/images/loro_orejiamarillo.png",
+      imagePath: "assets/images/animals/loro_orejiamarillo.png",
     ),
   ];
 }

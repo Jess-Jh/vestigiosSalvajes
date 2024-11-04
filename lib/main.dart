@@ -1,7 +1,6 @@
 // lib/main.dart
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:vestigios_salvajes/models/question.dart';
 import 'package:vestigios_salvajes/src/pages/trivia_screen.dart';
 import 'package:vestigios_salvajes/src/widgets/moving_curve_image.dart';
 
@@ -80,109 +79,83 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Center(
-          child: FadeTransition(
-            opacity: _fadeAnimation,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Vestigios Salvajes',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Montez',
-                      fontFamilyFallback: <String>[
-                        'Montez-Regular',
-                      ],
-                      fontSize: 58,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                height: 250,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/jungle_background.webp'),
+                    fit: BoxFit.cover,
                   ),
-                  const SizedBox(height: 20),
-                  // Imagen con bordes animados
-                  const MovingCurvedImage(),
-
-                  const SizedBox(height: 30),
-                  const Text(
-                    'Selecciona el nivel de dificultad',
-                    style: TextStyle(fontSize: 22, color: Colors.white70),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      textStyle: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 15),
-                      backgroundColor: Colors.green,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const TriviaScreen(difficulty: Difficulty.easy),
-                        ),
-                      );
-                      _audioPlayer.stop();
-                    },
-                    child: const Text('Fácil'),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      textStyle: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 15),
-                      backgroundColor: Colors.orange,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const TriviaScreen(difficulty: Difficulty.medium),
-                        ),
-                      );
-                      _audioPlayer.stop();
-                    },
-                    child: const Text('Intermedio'),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      textStyle: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 15),
-                      backgroundColor: Colors.red,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const TriviaScreen(difficulty: Difficulty.hard),
-                        ),
-                      );
-                      _audioPlayer.stop();
-                    },
-                    child: const Text('Difícil'),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
+            Center(
+              child: FadeTransition(
+                opacity: _fadeAnimation,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Vestigios Salvajes',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Montez',
+                          fontFamilyFallback: <String>[
+                            'Montez-Regular',
+                          ],
+                          fontSize: 68,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 43, 58, 39),
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                      // Imagen con bordes animados
+                      const MovingCurvedImage(),
+
+                      const SizedBox(height: 50),
+
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 40,
+                            vertical: 15,
+                          ),
+                          backgroundColor: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TriviaScreen(),
+                            ),
+                          );
+                          _audioPlayer.stop();
+                        },
+                        child: const Text('Iniciar juego'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -6,9 +6,7 @@ import 'package:vestigios_salvajes/models/question.dart';
 import 'package:vestigios_salvajes/models/questions_data.dart';
 
 class TriviaScreen extends StatefulWidget {
-  final Difficulty difficulty;
-
-  const TriviaScreen({super.key, required this.difficulty});
+  const TriviaScreen({super.key});
 
   @override
   _TriviaScreenState createState() => _TriviaScreenState();
@@ -16,7 +14,10 @@ class TriviaScreen extends StatefulWidget {
 
 class _TriviaScreenState extends State<TriviaScreen>
     with SingleTickerProviderStateMixin {
-  late List<Question> questions;
+  late List<Question> easyQuestions;
+  late List<Question> mediumQuestions;
+  late List<Question> hardQuestions;
+  List<Question> questions = [];
   int currentQuestionIndex = 0;
   int score = 0;
   bool isAnswered = false;
@@ -24,22 +25,48 @@ class _TriviaScreenState extends State<TriviaScreen>
   Timer? timer;
   late BoxDecoration boxDecoration;
   late BoxDecoration boxDecorationAppbar;
-  late AudioPlayer audioPlayer;
-
+  final AudioPlayer audioPlayer = AudioPlayer();
   late AnimationController _controller;
   late Animation<double> _progressAnimation;
-
-  static const int maxTime = 10; // Tiempo total
-  int remainingTime = maxTime; // Tiempo restante
+  static const int maxTime = 10;
+  int remainingTime = maxTime;
+  int difficultyLevel = 0; // Nivel actual de dificultad
 
   @override
   void initState() {
     super.initState();
-    questions =
-        getQuestions().where((q) => q.difficulty == widget.difficulty).toList();
-    audioPlayer = AudioPlayer();
+    // Cargar preguntas por dificultad y mezclar aleatoriamente
+    easyQuestions = getQuestions()
+        .where((q) => q.difficulty == Difficulty.easy)
+        .toList()
+      ..shuffle();
+    mediumQuestions = getQuestions()
+        .where((q) => q.difficulty == Difficulty.medium)
+        .toList()
+      ..shuffle();
+    hardQuestions = getQuestions()
+        .where((q) => q.difficulty == Difficulty.hard)
+        .toList()
+      ..shuffle();
 
-    // Inicializar el controlador de animación
+    loadQuestions();
+    initializeAnimation();
+
+    setBackgroundColorAndSound();
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    _controller.dispose();
+    audioPlayer.stop();
+    audioPlayer.dispose(); // Detener y liberar el reproductor de audio
+
+    super.dispose();
+  }
+
+  void initializeAnimation() {
     _controller = AnimationController(
       duration: const Duration(seconds: maxTime),
       vsync: this,
@@ -49,29 +76,30 @@ class _TriviaScreenState extends State<TriviaScreen>
 
     _progressAnimation =
         Tween<double>(begin: 1.0, end: 0.0).animate(_controller);
-
-    setBackgroundColorAndSound();
-    startTimer();
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    audioPlayer.stop();
-
-    audioPlayer.dispose(); // Detener y liberar el reproductor de audio
-
-    super.dispose();
+  void loadQuestions() {
+    if (difficultyLevel == 0) {
+      questions = easyQuestions.take(5).toList();
+    } else if (difficultyLevel == 1) {
+      isAnswered = false;
+      questions = mediumQuestions.take(5).toList();
+    } else if (difficultyLevel == 2) {
+      isAnswered = false;
+      questions = hardQuestions.take(5).toList();
+    }
+    currentQuestionIndex = 0;
+    setBackgroundColorAndSound();
   }
 
   void setBackgroundColorAndSound() {
-    switch (widget.difficulty) {
-      case Difficulty.easy:
+    switch (difficultyLevel) {
+      case 0: //Easy
         boxDecoration = BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.green[300]!.withOpacity(0.7),
-              Colors.teal[900]!.withOpacity(0.7),
+              Colors.green[300]!.withOpacity(0.9),
+              Colors.teal[900]!.withOpacity(0.9),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -94,7 +122,7 @@ class _TriviaScreenState extends State<TriviaScreen>
         audioPlayer.setSource(AssetSource(
             'sounds/easy.wav')); // Asegúrate de tener el archivo en assets
         break;
-      case Difficulty.medium:
+      case 1: //Medium
         boxDecoration = BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -121,7 +149,7 @@ class _TriviaScreenState extends State<TriviaScreen>
         );
         audioPlayer.setSource(AssetSource('sounds/medium.wav'));
         break;
-      case Difficulty.hard:
+      case 2: //Hard
         boxDecoration = BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -166,45 +194,36 @@ class _TriviaScreenState extends State<TriviaScreen>
 
   void startTimer() {
     remainingTime = maxTime;
-    _controller.forward(); // Comienza la animación
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    _controller.forward(from: 0.0);
+    timer?.cancel();
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (remainingTime > 0) {
-        remainingTime--;
+        setState(() {
+          remainingTime--;
+        });
       } else {
         timer.cancel();
-        checkAnswer(-1); // Considera incorrecto si el tiempo se agota
+        checkAnswer(-1);
       }
     });
   }
 
   void checkAnswer(int selectedIndex) {
     if (isAnswered) return;
-    String feedbackMessage;
-    String imagePath;
-    bool isCorrect = false;
+
+    bool isCorrect =
+        selectedIndex == questions[currentQuestionIndex].correctAnswerIndex;
 
     setState(() {
       timer?.cancel();
       isAnswered = true;
-      if (selectedIndex == questions[currentQuestionIndex].correctAnswerIndex) {
-        score++;
-        isCorrect = true;
-      } else {
-        isCorrect = false;
-      }
-
-      if (isCorrect) {
-        feedbackMessage =
-            '¡Correcto! Este animal es el dodo, extinto hace siglos.';
-        imagePath = 'assets/images/animals/megatherium.jpg';
-      } else {
-        feedbackMessage = 'Incorrecto. Intenta nuevamente.';
-        imagePath = 'assets/images/wrong_answer.jpeg';
-      }
+      score += isCorrect ? 1 : 0;
 
       showFeedbackDialog(
-        feedbackMessage,
-        imagePath,
+        isCorrect ? 'Bien hecho!' : 'Intenta nuevamente.',
+        isCorrect
+            ? 'assets/images/animals/megatherium.jpg'
+            : 'assets/images/wrong_answer.jpeg',
         isCorrect ? 'Correcto' : 'Incorrecto',
       );
 
@@ -219,10 +238,15 @@ class _TriviaScreenState extends State<TriviaScreen>
       if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
         isAnswered = false;
-        feedbackMessage = "";
         startTimer();
       } else {
-        _showFinalScoreDialog();
+        if (difficultyLevel < 2) {
+          difficultyLevel++;
+          loadQuestions();
+          startTimer();
+        } else {
+          _showFinalScoreDialog();
+        }
       }
     });
   }
@@ -233,7 +257,7 @@ class _TriviaScreenState extends State<TriviaScreen>
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Juego Terminado"),
-          content: Text("Tu puntuación es $score/${questions.length}"),
+          content: Text("Tu puntuación es $score/${questions.length * 3}"),
           actions: <Widget>[
             TextButton(
               child: const Text("Reiniciar"),
@@ -246,7 +270,6 @@ class _TriviaScreenState extends State<TriviaScreen>
               child: const Text("Salir"),
               onPressed: () {
                 Navigator.of(context).pop();
-                // Aquí podrías navegar a otra pantalla o cerrar la app
               },
             ),
           ],
@@ -260,9 +283,9 @@ class _TriviaScreenState extends State<TriviaScreen>
       currentQuestionIndex = 0;
       score = 0;
       isAnswered = false;
-      feedbackMessage = "";
+      difficultyLevel = 0;
+      loadQuestions();
       startTimer();
-      setBackgroundColorAndSound(); // Reestablecer el color y el sonido
     });
   }
 
