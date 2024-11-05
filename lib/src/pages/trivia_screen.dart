@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart'; // Importa el paquete de audio
+import 'package:audioplayers/audioplayers.dart';
 import 'package:vestigios_salvajes/models/question.dart';
 import 'package:vestigios_salvajes/models/questions_data.dart';
 
@@ -27,6 +27,7 @@ class _TriviaScreenState extends State<TriviaScreen>
   late BoxDecoration boxDecoration;
   late BoxDecoration boxDecorationAppbar;
   final AudioPlayer audioPlayer = AudioPlayer();
+  final AudioPlayer audioPlayerAnswers = AudioPlayer();
   late AnimationController _controller;
   late Animation<double> _progressAnimation;
   static const int maxTime = 10;
@@ -62,6 +63,8 @@ class _TriviaScreenState extends State<TriviaScreen>
     timer?.cancel();
     _controller.dispose();
     audioPlayer.stop();
+    audioPlayerAnswers.stop();
+    audioPlayerAnswers.dispose();
     audioPlayer.dispose(); // Detener y liberar el reproductor de audio
 
     super.dispose();
@@ -221,16 +224,30 @@ class _TriviaScreenState extends State<TriviaScreen>
       score += isCorrect ? 1 : 0;
 
       showFeedbackDialog(
-        isCorrect ? 'Bien hecho!' : 'Intenta nuevamente.',
+        isCorrect
+            ? questions[currentQuestionIndex].info
+            : 'Intenta nuevamente.',
         isCorrect
             ? 'assets/images/animals/megatherium.jpg'
             : 'assets/images/wrong_answer.jpeg',
         isCorrect ? 'Correcto' : 'Incorrecto',
       );
 
+      if (isCorrect) {
+        audioPlayerAnswers.play(
+          AssetSource('sounds/correct_answer.wav'),
+          volume: 1,
+        );
+      } else {
+        audioPlayerAnswers.play(
+          AssetSource('sounds/incorrect_answer.wav'),
+          volume: 1,
+        );
+      }
+
       // audioPlayer
       //     .setSource(AssetSource('sounds/answer.mp3')); // Sonido al responder
-      audioPlayer.resume(); // Reproducir el sonido
+      audioPlayerAnswers.resume(); // Reproducir el sonido
     });
   }
 
@@ -281,6 +298,7 @@ class _TriviaScreenState extends State<TriviaScreen>
                 ),
               ),
               onPressed: () {
+                audioPlayer.stop();
                 Navigator.of(context).pop();
                 resetGame();
               },
@@ -294,6 +312,7 @@ class _TriviaScreenState extends State<TriviaScreen>
                 ),
               ),
               onPressed: () {
+                audioPlayer.stop();
                 Navigator.pushReplacementNamed(context, '/menu');
               },
             ),

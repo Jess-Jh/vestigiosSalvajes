@@ -147,6 +147,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                           backgroundColor: Colors.white,
                         ),
                         onPressed: () {
+                          _audioPlayer.stop();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -160,7 +161,6 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                               ),
                             ),
                           );
-                          _audioPlayer.stop();
                         },
                         child: const Text('Iniciar juego'),
                       ),
