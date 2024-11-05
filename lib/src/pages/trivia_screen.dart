@@ -6,7 +6,8 @@ import 'package:vestigios_salvajes/models/question.dart';
 import 'package:vestigios_salvajes/models/questions_data.dart';
 
 class TriviaScreen extends StatefulWidget {
-  const TriviaScreen({super.key});
+  final Function onRestartSound;
+  const TriviaScreen({super.key, required this.onRestartSound});
 
   @override
   _TriviaScreenState createState() => _TriviaScreenState();
@@ -256,20 +257,44 @@ class _TriviaScreenState extends State<TriviaScreen>
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Juego Terminado"),
-          content: Text("Tu puntuación es $score/${questions.length * 3}"),
+          title: const Text(
+            "Juego Terminado",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Text(
+            "Tu puntuación es $score/${questions.length * 3}",
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           actions: <Widget>[
             TextButton(
-              child: const Text("Reiniciar"),
+              child: const Text(
+                "Reiniciar",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
                 resetGame();
               },
             ),
             TextButton(
-              child: const Text("Salir"),
+              child: const Text(
+                "Salir",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pushReplacementNamed(context, '/menu');
               },
             ),
           ],
@@ -313,6 +338,7 @@ class _TriviaScreenState extends State<TriviaScreen>
               ),
               onPressed: () {
                 audioPlayer.stop();
+                widget.onRestartSound.call();
                 Navigator.of(context).pop();
               },
             );
@@ -383,8 +409,11 @@ class _TriviaScreenState extends State<TriviaScreen>
               return ElevatedButton(
                 onPressed: isAnswered ? null : () => checkAnswer(idx),
                 style: ElevatedButton.styleFrom(
-                    textStyle:
-                        const TextStyle(color: Colors.black, fontSize: 18),
+                    alignment: Alignment.center,
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
                     backgroundColor: isAnswered ? Colors.grey : Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),

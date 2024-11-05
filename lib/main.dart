@@ -20,6 +20,13 @@ class TriviaApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       home: const DifficultySelectionScreen(),
+      // Configura la pantalla inicial de la aplicación
+      initialRoute:
+          '/menu', // Cambia esto según la pantalla que quieras inicial
+      // Define las rutas de la aplicación
+      routes: {
+        '/menu': (context) => const DifficultySelectionScreen(),
+      },
     );
   }
 }
@@ -143,7 +150,14 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const TriviaScreen(),
+                              builder: (context) => TriviaScreen(
+                                onRestartSound: () {
+                                  _audioPlayer.play(
+                                    AssetSource('/sounds/jungle_sound.mp3'),
+                                    volume: 1,
+                                  );
+                                },
+                              ),
                             ),
                           );
                           _audioPlayer.stop();
