@@ -47,56 +47,37 @@ class WinnerDialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: Text(
-                        texts.great_job,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white.withOpacity(0.7),
-                        ),
-                      ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Text(
+                    texts.great_job,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.white.withOpacity(0.7),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        animalSelected.name,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.lightBlue[50],
-                        ),
-                      ),
-                      Text(
-                        ' "${animalSelected.scientificName}"',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 20,
-                          color: Colors.deepPurple[100],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Center(
-                    child: Image.asset(
-                      animalSelected.assetPath,
-                      height: 200,
-                    ),
-                  ),
-                ],
+                ),
               ),
+              const SizedBox(height: 10),
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    animalSelected.assetPath,
+                    height: 200,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
               Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 26, vertical: 6),
                   child: Text(
                     animalSelected.info,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.7),
                       height: 1.2,
@@ -128,20 +109,14 @@ class WinnerDialog extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.multiple_stop_rounded,
-                            color: Colors.white.withOpacity(0.7),
-                          ),
-                          Text(
-                            "${texts.movements} $moves",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white.withOpacity(0.7),
-                            ),
-                          ),
-                        ],
+                      const SizedBox(width: 10),
+                      Text(
+                        "${texts.movements} $moves",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white.withOpacity(0.7),
+                        ),
                       ),
                     ],
                   ),

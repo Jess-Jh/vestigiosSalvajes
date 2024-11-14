@@ -185,7 +185,7 @@ List<Question> getQuestions() {
         info:
             "El Delfín Rosado (Inia geoffrensis) es un mamífero acuático de agua dulce que habita en el Amazonas.",
         difficulty: Difficulty.medium,
-        imagePath: "assets/animals/delfin_rosado.webp",
+        imagePath: "assets/animals/delfin_rosado.jpg",
         nombreCientifico: "Inia geoffrensis"),
     Question(
       question:
@@ -355,7 +355,7 @@ List<Question> getQuestions() {
         info:
             "El Pez Sierra (Pristis pristis) es conocido por su hocico en forma de sierra y habita en ríos y estuarios.",
         difficulty: Difficulty.hard,
-        imagePath: "assets/animals/pez_sierra.png",
+        imagePath: "assets/animals/pez_sierra.jpg",
         nombreCientifico: "Pristis pristis"),
     Question(
       question:
