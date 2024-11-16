@@ -145,7 +145,7 @@ const puzzleOptions = <PuzzleImage>[
     info:
         'El Sábalo, también conocido como Sabalete o Tarpon (Megalops atlanticus), se alimenta principalmente de peces pequeños en su hábitat.',
     scientificName: 'Megalops atlanticus',
-    assetPath: "assets/animals/sabalo.webp",
+    assetPath: "assets/animals/sabalo.jpg",
   ),
   PuzzleImage(
     name: 'Serpiente de San Andrés',

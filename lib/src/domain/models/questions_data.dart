@@ -256,7 +256,7 @@ List<Question> getQuestions() {
       info:
           "El Sábalo, también conocido como Sabalete o Tarpon (Megalops atlanticus), se alimenta principalmente de peces pequeños en su hábitat.",
       difficulty: Difficulty.medium,
-      imagePath: "assets/animals/sabalo.webp",
+      imagePath: "assets/animals/sabalo.jpg",
       nombreCientifico: "Megalops atlanticus",
     ),
     Question(
