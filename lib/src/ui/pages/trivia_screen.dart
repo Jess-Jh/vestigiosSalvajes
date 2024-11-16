@@ -35,6 +35,11 @@ class _TriviaScreenState extends State<TriviaScreen>
   int remainingTime = maxTime;
   int difficultyLevel = 0; // Nivel actual de dificultad
 
+  // Define tiempos para cada nivel de dificultad
+  static const int easyTime = 15;
+  static const int mediumTime = 10;
+  static const int hardTime = 5;
+
   @override
   void initState() {
     super.initState();
@@ -186,7 +191,26 @@ class _TriviaScreenState extends State<TriviaScreen>
   }
 
   void startTimer() {
-    remainingTime = maxTime;
+    // Ajusta el tiempo de respuesta según el nivel de dificultad
+    switch (difficultyLevel) {
+      case 0:
+        remainingTime = easyTime;
+        _controller.duration = const Duration(seconds: easyTime);
+        break;
+      case 1:
+        remainingTime = mediumTime;
+        _controller.duration = const Duration(seconds: mediumTime);
+        break;
+      case 2:
+        remainingTime = hardTime;
+        _controller.duration = const Duration(seconds: hardTime);
+        break;
+      default:
+        remainingTime = mediumTime; // Tiempo predeterminado
+        _controller.duration = const Duration(seconds: mediumTime);
+    }
+
+    // Reinicia la animación y el temporizador
     _controller.forward(from: 0.0);
     timer?.cancel();
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -196,7 +220,8 @@ class _TriviaScreenState extends State<TriviaScreen>
         });
       } else {
         timer.cancel();
-        checkAnswer(-1);
+        checkAnswer(
+            -1); // Llama a la función para indicar que el tiempo se agotó
       }
     });
   }
