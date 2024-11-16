@@ -257,8 +257,6 @@ class _TriviaScreenState extends State<TriviaScreen>
         );
       }
 
-      // audioPlayer
-      //     .setSource(AssetSource('sounds/answer.mp3')); // Sonido al responder
       audioPlayerAnswers.resume(); // Reproducir el sonido
     });
   }

@@ -5,14 +5,12 @@ class PuzzleImage extends Equatable {
   final String info;
   final String scientificName;
   final String assetPath;
-  final String soundPath;
 
   const PuzzleImage({
     required this.name,
     required this.info,
     required this.scientificName,
     required this.assetPath,
-    required this.soundPath,
   });
 
   @override
@@ -21,6 +19,5 @@ class PuzzleImage extends Equatable {
         info,
         scientificName,
         assetPath,
-        soundPath,
       ];
 }

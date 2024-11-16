@@ -53,7 +53,6 @@ class GameView extends StatelessWidget {
                             '¡Ahora ya sabes como funciona, aumenta el reto y continúa con los animales!',
                         scientificName: 'Any',
                         assetPath: 'assets/images/numeric-puzzle.png',
-                        soundPath: '',
                       ),
                 );
               },
