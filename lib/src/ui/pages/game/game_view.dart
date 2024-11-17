@@ -15,7 +15,8 @@ import 'package:my_puzzle/src/ui/utils/responsive.dart';
 import 'package:provider/provider.dart';
 
 class GameView extends StatelessWidget {
-  const GameView({Key? key}) : super(key: key);
+  final Function? onRestartSound;
+  const GameView({Key? key, this.onRestartSound}) : super(key: key);
 
   void _onKeyBoardEvent(BuildContext context, RawKeyEvent event) {
     if (event is RawKeyDownEvent) {
@@ -91,7 +92,7 @@ class GameView extends StatelessWidget {
                   ),
                   onPressed: () {
                     // audioPlayer.stop();
-                    // widget.onRestartSound.call();
+                    onRestartSound?.call();
                     Navigator.of(context).pop();
                   },
                 );

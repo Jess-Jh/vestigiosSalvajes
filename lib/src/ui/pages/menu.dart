@@ -22,8 +22,6 @@ class TriviaApp extends StatelessWidget {
       ),
       home: const DifficultySelectionScreen(),
       // Configura la pantalla inicial de la aplicación
-      initialRoute:
-          '/menu', // Cambia esto según la pantalla que quieras inicial
       // Define las rutas de la aplicación
       routes: {
         '/menu': (context) => const DifficultySelectionScreen(),
@@ -51,10 +49,10 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     super.initState();
     // Inicializar el AudioPlayer y reproducir el sonido de jungla
     _audioPlayer = AudioPlayer();
-    // _audioPlayer.play(
-    //   AssetSource('/sounds/jungle_sound.mp3'),
-    //   volume: 1,
-    // );
+    _audioPlayer.play(
+      AssetSource('/sounds/jungle_sound.mp3'),
+      volume: 1,
+    );
 
     _controller = AnimationController(
       vsync: this,
@@ -156,10 +154,10 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                             MaterialPageRoute(
                               builder: (context) => TriviaScreen(
                                 onRestartSound: () {
-                                  // _audioPlayer.play(
-                                  //   AssetSource('/sounds/jungle_sound.mp3'),
-                                  //   volume: 1,
-                                  // );
+                                  _audioPlayer.play(
+                                    AssetSource('/sounds/jungle_sound.mp3'),
+                                    volume: 1,
+                                  );
                                 },
                               ),
                             ),
@@ -193,7 +191,14 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                               builder: (context) {
                                 _audioPlayer.stop();
 
-                                return const GameView();
+                                return GameView(
+                                  onRestartSound: () {
+                                    _audioPlayer.play(
+                                      AssetSource('/sounds/jungle_sound.mp3'),
+                                      volume: 1,
+                                    );
+                                  },
+                                );
                               },
                             ),
                           );

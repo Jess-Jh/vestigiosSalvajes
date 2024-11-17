@@ -363,8 +363,8 @@ List<Question> getQuestions() {
       options: [
         "Delfín Rosado",
         "Delfín de Río",
-        "Delfín del Indo"
-            "Delfín del río Yangtsé",
+        "Delfín del Indo",
+        "Delfín del río Yangtsé"
       ],
       correctAnswerIndex: 3,
       info:
@@ -478,7 +478,7 @@ List<Question> getQuestions() {
       info:
           "La Serpiente del Caño del Dagua (Synophis plectovertebralis) es reconocida por su distintivo patrón de rayas.",
       difficulty: Difficulty.hard,
-      imagePath: "assets/animals/serpiente_dagua.png",
+      imagePath: "assets/animals/serpiente_dagua.jpg",
       nombreCientifico: "Synophis plectovertebralis",
     ),
     Question(
